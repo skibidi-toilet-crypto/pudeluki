@@ -2,7 +2,8 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-        
+
+const messagesStorage = [{ id: 1, text: 'Hello, world!' }];
 const pathToIndex = path.join(__dirname, 'static', 'index.html');
 const pathToCss = path.join(__dirname, 'static', 'style.css');
 const pathToJs = path.join(__dirname, 'static', 'script.js');
@@ -38,6 +39,29 @@ const server = http.createServer((req, res) => {
     }
 });
 
+const { Server } = require('socket.io');
+const io = new Server(server);
+
+io.on('connection', async (socket) => {
+    const guestNickname = 'Guest' + Math.floor(Math.random() * 1000);
+    console.log(`${guestNickname} connected. id - ${socket.id}`);
+
+    socket.emit('all_messagess', Mass   );
+});
+    try {
+        const messages = await db.getAllMessages();
+        socket.emit('all_messages', messages);
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+    }
+    socket.on('new_message', async (message) => {
+        try {
+            await db.addMessage(message,null);
+       io.emit('message', guestNickname + ': ' + message);
+        } catch (error) {
+            console.error('Error adding message:', error);
+        }         
+    });
 server.listen(3000, () => {
     console.log('Server running on port 3000');
-});
+});  

@@ -3,6 +3,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
 
+    const messages = document.getElementById('messages');
+    const fort = document.getElementById('fort');
+    const input = document.getElementById('input'); 
+    const db = require('./database');
+    const path = require('path');
+socket.on ('all_messages', function (msgArray) {
+    messages.innerHTML = '';
+    msgArray.forEach(msg => {
+        let item = document.createElement('li');
+        let autor = msg.author || 'unknown';
+        item.textContent = autor + ':' + msg.message;
+        messages.appendChild(item);
+    });
+    window.scrollTo(0, document.body.scrollHeight);
+});
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value) {
+        socket.emit('new_message', input.value );
+        input.value = '';
+    }
+});
+
     function addMessage(message, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
