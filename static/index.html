@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta> http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoboBob</title>
+    <title>RoboBob Chat</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>RoboBobChat</h1>
-    <div id="chat-container">
-        <div id="chat-box"></div>
-        <div id="input-container">
-            <input type="text" id="user-input" placeholder="Type your message here...">
-            <button id="send-btn">Send</button>
-        </div>
-    </div>
+     <main>
+        <h1 class="header">RoboBob Chat</h1>
+        <ul id="messages">
+          <li>Test message</li>
+          <li>Hello!! Test message 2</li>
+</ul>
+<form id="form">
+    <input type="text" id="input" placeholder="Type your message here" />
+    <input type="submit" class="sumbit" value="Send" />
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+
 </body>
-<script src="script.js"></script>
 </html>
