@@ -2,7 +2,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-
+const db = require('./database');
 //const messagesStorage = [{ login: 'GGG', content: 'Hello' }];
 
 const pathToIndex = path.join(__dirname, 'static', 'index.html');
@@ -72,7 +72,7 @@ io.on('connection', async (socket) => {
             await db.addMessage({ message, currentUserId });
             console.log(`BD sawed masseges ID ${currentUserId} (${currentNickname})`)
 
-            io.emit('message', currentNickName + ': ' + message);
+            io.emit('message', currentNickname + ': ' + message);
         } catch (e) {
             console.error('Error saving message:', e);
         }
